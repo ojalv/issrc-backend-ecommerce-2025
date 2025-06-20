@@ -1,6 +1,7 @@
 // index.js (en la raíz del proyecto)
-import express from 'express';
-import sequelize from './src/config/db/connection.js'; // Importa la instancia (nota el .js)
+import express from "express";
+import { sequelize } from "./src/models/index.js"; // Importa la instancia (nota el .js)
+import { syncDB, authDB } from "./src/utils/db.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,27 +10,22 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Ruta de prueba
-app.get('/', (req, res) => {
-  res.send('¡Backend funcionando!');
+app.get("/", (req, res) => {
+  res.send("¡Backend funcionando!");
 });
 
 // Iniciar servidor y probar conexión DB
 async function startServer() {
   try {
-    // Intenta autenticar la conexión a la DB
-    await sequelize.authenticate();
-    console.log('✅ Conexión a la base de datos establecida correctamente.');
-
-    // Sincroniza modelos (más sobre esto en el Paso 3)
-    // await sequelize.sync({ force: false });
-    // console.log('🔄 Modelos sincronizados con la base de datos.');
+    await authDB(sequelize); // Intenta autenticar la conexión a la DB
+    await syncDB(sequelize); // Sincroniza modelos
 
     // Inicia el servidor Express
     app.listen(PORT, () => {
       console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     });
   } catch (error) {
-    console.error('❌ No se pudo conectar a la base de datos:', error);
+    console.error("❌ No se pudo conectar a la base de datos:", error);
   }
 }
 
