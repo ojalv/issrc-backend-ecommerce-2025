@@ -2,12 +2,16 @@
 import express from "express";
 import { sequelize } from "./src/models/index.js"; // Importa la instancia (nota el .js)
 import { syncDB, authDB } from "./src/utils/db.js";
+import categoriaRoutes from "./src/routes/categoriaRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware básico para parsear JSON
 app.use(express.json());
+
+// Rutas de API
+app.use("/categorias", categoriaRoutes);
 
 // Ruta de prueba
 app.get("/", (req, res) => {
