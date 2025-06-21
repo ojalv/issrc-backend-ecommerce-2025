@@ -7,12 +7,12 @@ import {
   deleteCategoria
 } from '../controllers/categoriaController.js';
 
-const router = Router();
+const categoriaRoutes = Router();
 
-router.get('/', getCategorias);
-router.get('/:id', getCategoriaById);
-router.post('/', createCategoria);
-router.put('/:id', updateCategoria);
-router.delete('/:id', deleteCategoria);
+categoriaRoutes.get('/', getCategorias);
+categoriaRoutes.get('/:id', getCategoriaById);
+categoriaRoutes.post('/', createCategoria);
+categoriaRoutes.put('/:id', updateCategoria);
+categoriaRoutes.delete('/:id', deleteCategoria);
 
-export default router;
+export default categoriaRoutes;
