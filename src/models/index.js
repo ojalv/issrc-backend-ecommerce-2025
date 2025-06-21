@@ -3,6 +3,10 @@ import Producto from './Producto.js';
 import Categoria from './Categoria.js';
 import Marca from './Marca.js';
 import Imagen from './Imagen.js';
+import Cliente from './Cliente.js';
+import Empleado from './Empleado.js';
+import OrdenDeCompra from './OrdenDeCompra.js';
+import ItemOrdenDeCompra from './ItemOrdenDeCompra.js';
 
 /* --- Relación Producto <-> Marca (N:1) --- */
 Producto.belongsTo(Marca, {
@@ -32,6 +36,36 @@ Producto.hasMany(Imagen, {
 Imagen.belongsTo(Producto, {
   foreignKey: 'idProducto',
   as: 'producto'
+});
+
+/* --- Relación OrdenDeCompra <-> ItemOrdenDeCompra (1:N) ---*/
+OrdenDeCompra.hasMany(ItemOrdenDeCompra, {
+  foreignKey: 'idOrdenDeCompra',
+  as: 'items'
+});
+ItemOrdenDeCompra.belongsTo(OrdenDeCompra, {
+  foreignKey: 'idOrdenDeCompra',
+  as: 'ordenDeCompra'
+});
+
+/* --- Relación OrdenDeCompra <-> Cliente (N:1) --- */
+OrdenDeCompra.belongsTo(Cliente, {
+  foreignKey: 'idCliente',
+  as: 'cliente'
+});
+Cliente.hasMany(OrdenDeCompra, {
+  foreignKey: 'idCliente',
+  as: 'ordenesDeCompra'
+});
+
+/* --- Relación OrdenDeCompra <-> Empleado (N:1) --- */
+OrdenDeCompra.belongsTo(Empleado, {
+  foreignKey: 'idDespachador',
+  as: 'despachador'
+});
+Empleado.hasMany(OrdenDeCompra, {
+  foreignKey: 'idDespachador',
+  as: 'ordenesDeCompra'
 });
 
 export { sequelize }
