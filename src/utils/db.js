@@ -4,7 +4,7 @@ export async function authDB(sequelize) {
 }
 
 export async function syncDB(sequelize) {
-    await sequelize.sync({ force: true }); //true solo en desarrollo
+    await sequelize.sync({ force: false }); //true solo en desarrollo
     console.log('✅ Base de datos sincronizada');
 
     // Sincroniza los modelos con la base de datos.
