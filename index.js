@@ -10,6 +10,7 @@ import itemOrdenDeCompraRoutes from "./src/routes/itemOrdenDeCompraRoutes.js";
 import clienteRoutes from "./src/routes/clienteRoutes.js";
 import empleadoRoutes from "./src/routes/empleadoRoutes.js";
 import marcaRoutes from "./src/routes/marcaRoutes.js";
+import carritoRoutes from "./src/routes/carritoRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use('/imagenes', imagenRoutes);
 app.use('/productos', productoRoutes);
 app.use('/ordenes', ordenDeCompraRoutes);
 app.use('/items', itemOrdenDeCompraRoutes);
+app.use('/carrito', carritoRoutes);
 app.use('/clientes', clienteRoutes);
 app.use('/empleados', empleadoRoutes);
 
