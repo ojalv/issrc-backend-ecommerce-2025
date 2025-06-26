@@ -11,6 +11,7 @@ import clienteRoutes from "./src/routes/clienteRoutes.js";
 import empleadoRoutes from "./src/routes/empleadoRoutes.js";
 import marcaRoutes from "./src/routes/marcaRoutes.js";
 import carritoRoutes from "./src/routes/carritoRoutes.js";
+import passwordResetRoutes from "./src/routes/passwordResetRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -28,6 +29,7 @@ app.use('/items', itemOrdenDeCompraRoutes);
 app.use('/carrito', carritoRoutes);
 app.use('/clientes', clienteRoutes);
 app.use('/empleados', empleadoRoutes);
+app.use('/password-resets', passwordResetRoutes);
 
 // Ruta de prueba
 app.get("/", (req, res) => {
