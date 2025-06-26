@@ -7,6 +7,7 @@ import Cliente from './Cliente.js';
 import Empleado from './Empleado.js';
 import OrdenDeCompra from './OrdenDeCompra.js';
 import ItemOrdenDeCompra from './ItemOrdenDeCompra.js';
+import ItemCarritoDeCompra from './ItemCarritoDeCompra.js';
 
 /* --- Relación Producto <-> Marca (N:1) --- */
 Producto.belongsTo(Marca, {
@@ -66,6 +67,26 @@ OrdenDeCompra.belongsTo(Empleado, {
 Empleado.hasMany(OrdenDeCompra, {
   foreignKey: 'idDespachador',
   as: 'ordenesDeCompra'
+});
+
+/* --- Relación Cliente <-> ItemCarritoDeCompra (1:N) --- */
+Cliente.hasMany(ItemCarritoDeCompra, {
+  foreignKey: 'idCliente',
+  as: 'itemsCarrito'
+});
+ItemCarritoDeCompra.belongsTo(Cliente, {
+  foreignKey: 'idCliente',
+  as: 'cliente'
+});
+
+/* --- Relación Producto <-> ItemCarritoDeCompra (1:N) --- */
+Producto.hasMany(ItemCarritoDeCompra, {
+  foreignKey: 'idProducto',
+  as: 'itemsCarrito'
+});
+ItemCarritoDeCompra.belongsTo(Producto, {
+  foreignKey: 'idProducto',
+  as: 'producto'
 });
 
 export { sequelize }
