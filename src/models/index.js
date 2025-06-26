@@ -8,6 +8,7 @@ import Empleado from './Empleado.js';
 import OrdenDeCompra from './OrdenDeCompra.js';
 import ItemOrdenDeCompra from './ItemOrdenDeCompra.js';
 import ItemCarritoDeCompra from './ItemCarritoDeCompra.js';
+import PasswordReset from './PasswordReset.js';
 
 /* --- Relación Producto <-> Marca (N:1) --- */
 Producto.belongsTo(Marca, {
@@ -87,6 +88,16 @@ Producto.hasMany(ItemCarritoDeCompra, {
 ItemCarritoDeCompra.belongsTo(Producto, {
   foreignKey: 'idProducto',
   as: 'producto'
+});
+
+/* --- Relación Cliente <-> PasswordReset (1:N) --- */
+Cliente.hasMany(PasswordReset, {
+  foreignKey: 'idCliente',
+  as: 'passwordResets'
+});
+PasswordReset.belongsTo(Cliente, {
+  foreignKey: 'idCliente',
+  as: 'cliente'
 });
 
 export { sequelize }
