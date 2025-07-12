@@ -2,6 +2,7 @@
 import express from "express";
 import { sequelize } from "./src/models/index.js"; // Importa la instancia (nota el .js)
 import { syncDB, authDB } from "./src/utils/db.js";
+import { crearRegistros } from "./src/utils/test.js"
 import categoriaRoutes from "./src/routes/categoriaRoutes.js";
 import imagenRoutes from "./src/routes/imagenRoutes.js";
 import productoRoutes from "./src/routes/productoRoutes.js";
@@ -41,6 +42,7 @@ async function startServer() {
   try {
     await authDB(sequelize); // Intenta autenticar la conexión a la DB
     await syncDB(sequelize); // Sincroniza modelos
+    await crearRegistros()
 
     // Inicia el servidor Express
     app.listen(PORT, () => {
