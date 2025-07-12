@@ -2,7 +2,7 @@
 import express from "express";
 import { sequelize } from "./src/models/index.js"; // Importa la instancia (nota el .js)
 import { syncDB, authDB } from "./src/utils/db.js";
-import { crearRegistros } from "./src/utils/test.js"
+import { crearRegistros } from "./src/utils/test.js";
 import categoriaRoutes from "./src/routes/categoriaRoutes.js";
 import imagenRoutes from "./src/routes/imagenRoutes.js";
 import productoRoutes from "./src/routes/productoRoutes.js";
@@ -13,24 +13,26 @@ import empleadoRoutes from "./src/routes/empleadoRoutes.js";
 import marcaRoutes from "./src/routes/marcaRoutes.js";
 import carritoRoutes from "./src/routes/carritoRoutes.js";
 import passwordResetRoutes from "./src/routes/passwordResetRoutes.js";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware básico para parsear JSON
 app.use(express.json());
+app.use(cors())
 
 // Rutas de API
-app.use('/categorias', categoriaRoutes);
-app.use('/marcas', marcaRoutes);
-app.use('/imagenes', imagenRoutes);
-app.use('/productos', productoRoutes);
-app.use('/ordenes', ordenDeCompraRoutes);
-app.use('/items', itemOrdenDeCompraRoutes);
-app.use('/carrito', carritoRoutes);
-app.use('/clientes', clienteRoutes);
-app.use('/empleados', empleadoRoutes);
-app.use('/password-resets', passwordResetRoutes);
+app.use("/categorias", categoriaRoutes);
+app.use("/marcas", marcaRoutes);
+app.use("/imagenes", imagenRoutes);
+app.use("/productos", productoRoutes);
+app.use("/ordenes", ordenDeCompraRoutes);
+app.use("/items", itemOrdenDeCompraRoutes);
+app.use("/carrito", carritoRoutes);
+app.use("/clientes", clienteRoutes);
+app.use("/empleados", empleadoRoutes);
+app.use("/password-resets", passwordResetRoutes);
 
 // Ruta de prueba
 app.get("/", (req, res) => {
@@ -42,7 +44,7 @@ async function startServer() {
   try {
     await authDB(sequelize); // Intenta autenticar la conexión a la DB
     await syncDB(sequelize); // Sincroniza modelos
-    await crearRegistros()
+    await crearRegistros();
 
     // Inicia el servidor Express
     app.listen(PORT, () => {
