@@ -25,7 +25,6 @@ app.use(cors())
 // Rutas de API
 app.use("/categorias", categoriaRoutes);
 app.use("/marcas", marcaRoutes);
-app.use("/imagenes", imagenRoutes);
 app.use("/productos", productoRoutes);
 app.use("/ordenes", ordenDeCompraRoutes);
 app.use("/items", itemOrdenDeCompraRoutes);

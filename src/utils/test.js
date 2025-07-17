@@ -12,6 +12,7 @@
 
 import Categoria from "../models/Categoria.js";
 import Marca from "../models/Marca.js";
+import Imagen from "../models/Imagen.js";
 import Producto from "../models/Producto.js";
 
 async function crearCategorias() {
@@ -26,6 +27,12 @@ async function crearMarcas() {
   await Marca.create({ nombre: "Xiaomi" });
   await Marca.create({ nombre: "Apple" });
   await Marca.create({ nombre: "Motorola" });
+}
+
+async function crearimagenes() {
+  await Imagen.create({ idProducto: 1, orden: 1, url: "https://andro4all.com/hero/2022/11/Galaxy-A34-portada.jpg?width=1200&aspect_ratio=16:9" });
+  await Imagen.create({ idProducto: 1, orden: 2, url: "https://cdn.andro4all.com/andro4all/2022/11/Galaxy-A34-2.jpg?height=600" });
+  await Imagen.create({ idProducto: 1, orden: 3, url: "https://cdn.andro4all.com/andro4all/2022/11/Galaxy-A34-3.jpg?height=600" });
 }
 
 async function crearProductos() {
@@ -113,6 +120,7 @@ export async function crearRegistros() {
     await crearCategorias();
     await crearMarcas();
     await crearProductos();
+    await crearimagenes();
     console.log("✅ Registros de prueba cargados correctamente");
   } catch (error) {
     console.error("❌ Error al crear registros:", error.message);

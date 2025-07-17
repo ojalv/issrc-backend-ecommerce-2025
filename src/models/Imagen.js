@@ -23,7 +23,7 @@ const Imagen = sequelize.define('Imagen', {
   },
   // URL de la imagen (obligatoria)
   url: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false
   },
   // Número de orden para mostrar las imágenes (opcional)
